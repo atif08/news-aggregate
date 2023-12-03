@@ -21,9 +21,19 @@ class NewsApiFetcherAction
 
     public function execute(): void
     {
-        $connector = new NewsConnector();
-        $response = $connector->send(new ArticlesRequest());
-        $this->storeNewsApiData->execute($response->json());
+        $page = 1;
+
+        do {
+            $connector = new NewsConnector();
+            $response = $connector->send(new ArticlesRequest($page));
+            $data = $response->json();
+
+            $this->storeNewsApiData->execute($data);
+
+            $page++;
+
+        } while (isset($data['articles']) && count($data['articles'])  > 0);
+
     }
 
 }

@@ -20,10 +20,10 @@ class StoreNewsApiData
 
                 $item = Article::updateOrCreate(["title" => $article['title']],
                     [
-                        "title" => $article['title'],
-                        "excerpt" => $article['content'],
-                        "content" => $article['description'],
-                        "author" => $article['author'],
+                        "title" => $article['title'] ?? null,
+                        "excerpt" => $article['content'] ?? null,
+                        "content" => $article['description'] ?? null,
+                        "author" => $article['author'] ?? null,
                         "published_at" => Carbon::parse($article['publishedAt']),
                         "source" => ArticleSource::NEWS,
                     ]);

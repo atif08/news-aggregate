@@ -19,11 +19,11 @@ class StoreNewYorkTimeApiData
             foreach ($data['response']['docs'] as $article) {
 
                 Article::updateOrCreate(["external_id" => $article['_id']], [
-                    "external_id" => $article['_id'],
-                    "title" => $article['headline']['main'],
-                    "excerpt" => $article['abstract'],
-                    "content" => $article['lead_paragraph'],
-                    "author" => $article['byline']['original'],
+                    "external_id" => $article['_id'] ?? null,
+                    "title" => $article['headline']['main'] ?? null,
+                    "excerpt" => $article['abstract'] ?? null,
+                    "content" => $article['lead_paragraph'] ?? null,
+                    "author" => $article['byline']['original'] ?? null,
                     "published_at" => Carbon::parse($article['pub_date']),
                     "source" => ArticleSource::NEW_YORK_TIME,
                 ]);

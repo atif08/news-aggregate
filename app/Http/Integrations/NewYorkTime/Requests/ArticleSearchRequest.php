@@ -10,11 +10,10 @@ use Saloon\Contracts\Response;
 
 class ArticleSearchRequest extends Request
 {
-    /**
-     * Define the HTTP method
-     *
-     * @var Method
-     */
+   public function __construct(private readonly int $page)
+   {
+   }
+
     protected Method $method = Method::GET;
 
     protected function defaultHeaders(): array
@@ -26,6 +25,7 @@ class ArticleSearchRequest extends Request
     protected function defaultQuery(): array
     {
         return [
+            "page"=>$this->page,
             "q"=>"smog",
             "begin_date" => Carbon::yesterday(),
             "end_date"=>Carbon::now()

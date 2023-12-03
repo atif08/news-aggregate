@@ -19,9 +19,17 @@ class GuardianApiFetcherAction
 
     public function execute(): void
     {
-        $connector = new GuardianConnector();
-        $response = $connector->send(new SearchRequest());
-        $this->storeGuardianApiData->execute($response->json());
+        $page = 1;
+
+        do {
+            $connector = new GuardianConnector();
+            $response = $connector->send(new SearchRequest($page));
+            $data = $response->json();
+            $this->storeGuardianApiData->execute($data);
+
+            $page++;
+
+        } while (isset($data['response']['results']) && count($data['response']['results']) > 0);
     }
 
 }

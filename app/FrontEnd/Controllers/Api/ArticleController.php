@@ -16,8 +16,8 @@ class ArticleController extends Controller
     {
 //        $articles = $articleIndexQuery->paginate();
 //        return response()->json($articles);
-        dispatch(new FetchNewsJob());
-        dispatch(new FetchNewYorkTimeJob());
+//        dispatch(new FetchNewsJob());
+//        dispatch(new FetchNewYorkTimeJob());
         dispatch(new FetchGuardianJob());
 
     }

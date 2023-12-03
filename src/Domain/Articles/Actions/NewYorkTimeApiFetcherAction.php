@@ -19,9 +19,18 @@ class NewYorkTimeApiFetcherAction
 
     public function execute(): void
     {
-        $connector = new NewYorkTimeConnector();
-        $response = $connector->send(new ArticleSearchRequest());
-        $this->storeNewsApiData->execute($response->json());
+
+        $page = 1;
+
+        do {
+            $connector = new NewYorkTimeConnector();
+            $response = $connector->send(new ArticleSearchRequest($page));
+            $data = $response->json();
+            $this->storeNewsApiData->execute($data);
+
+            $page++;
+
+        } while (isset($data['response']['docs']) && count($data['response']['docs']) > 0);
     }
 
 }

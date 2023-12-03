@@ -18,11 +18,11 @@ class StoreGuardianApiData
             foreach ($data['response']['results'] as $article) {
 
                 $item = Article::updateOrCreate(["external_id" => $article['id']], [
-                    "external_id" => $article['id'],
-                    "title" => $article['webTitle'],
-                    "excerpt" => substr($article['fields']['body'], 0, 500),
-                    "content" => $article['fields']['body'],
-                    "author" => $article['tags'][0]['webTitle'],
+                    "external_id" => $article['id'] ?? null,
+                    "title" => $article['webTitle'] ?? null,
+                    "excerpt" => $article['fields']['body'] ?? '',
+                    "content" => $article['fields']['body'] ?? '',
+                    "author" => $article['tags'][0]['webTitle'] ?? null,
                     "published_at" => Carbon::parse($article['webPublicationDate']),
                     "source" => ArticleSource::GUARDIAN,
                 ]);

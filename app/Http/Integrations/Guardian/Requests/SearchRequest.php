@@ -10,11 +10,10 @@ use Saloon\Contracts\Response;
 
 class SearchRequest extends Request
 {
-    /**
-     * Define the HTTP method
-     *
-     * @var Method
-     */
+    public function __construct(private readonly int $page)
+    {
+    }
+
     protected Method $method = Method::GET;
 
     protected function defaultHeaders(): array
@@ -23,11 +22,13 @@ class SearchRequest extends Request
             'Content-Type' => 'application/json',
         ];
     }
+
     protected function defaultQuery(): array
     {
         return [
-            "q"=>"12 years slave",
-            "from-date"=>Carbon::yesterday()
+            "page" => $this->page,
+            "q" => "12 years slave",
+            "from-date" => Carbon::yesterday()
         ];
     }
 

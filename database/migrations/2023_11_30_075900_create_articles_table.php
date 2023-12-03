@@ -18,7 +18,7 @@ return new class extends Migration
             $table->text('excerpt');
             $table->string('source');
             $table->string('author')->nullable();
-            $table->timestamp('published_at')->nullable();
+            $table->dateTime('published_at')->nullable();
             $table->longText('content');
             $table->timestamps();
         });

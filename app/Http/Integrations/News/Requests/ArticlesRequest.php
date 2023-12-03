@@ -15,6 +15,10 @@ class ArticlesRequest extends Request
      *
      * @var Method
      */
+    public function __construct(private readonly int $page)
+    {
+    }
+
     protected Method $method = Method::GET;
 
     protected function defaultHeaders(): array
@@ -27,6 +31,7 @@ class ArticlesRequest extends Request
     protected function defaultQuery(): array
     {
         return [
+            "page" =>$this->page,
             "q"=>"google",
             "from"=>Carbon::yesterday(),
             "to"=>Carbon::now(),

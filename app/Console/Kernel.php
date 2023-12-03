@@ -15,10 +15,9 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule): void
     {
-        $schedule->job(new FetchNewsJob)->hourly();
-        $schedule->job(new FetchGuardianJob())->hourly();
-        $schedule->job(new FetchNewYorkTimeJob())->hourly();
-        // $schedule->command('inspire')->hourly();
+        $schedule->job(new FetchNewsJob)->daily();
+        $schedule->job(new FetchGuardianJob())->daily();
+        $schedule->job(new FetchNewYorkTimeJob())->daily();
     }
 
     /**
